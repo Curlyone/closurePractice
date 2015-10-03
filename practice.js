@@ -77,7 +77,42 @@ console.log(count(), // 1
   Once completed, add a second argument that allows the function to be invoked N number of times.
   After the function has been called N number of times, console.log('STAHHP');
 */
+var make = function(fn) {
+  return function() {
+    if(counter < 1) {
+      fn();
+      counter++;
+    }  
+  };
+};
 
+var inner = make(function() {
+  console.log('invoked once');
+});
+
+var make = function(fn, n) {
+  var counter = 0;
+  return function() {
+    if(counter < n) {
+      fn();
+      counter++;
+    } 
+    else {
+      console.log('STAHHHHP');
+    }
+  };
+};
+
+var callback = function() {
+  console.log('function was invoked');
+};
+var inner = make(callback, 5);
+inner();
+inner();
+inner();
+inner();
+inner();
+inner();
 
 
 
